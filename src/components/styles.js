@@ -45,3 +45,6 @@ export const Line = styled.div`
   animation: ${props => props.animate ? `${progress} 1s linear infinite` : 'none' };
   animation-iteration-count: 1;
 `
+export const Space = styled.div`
+  width: ${props => `${props.width || 20}px`}
+`

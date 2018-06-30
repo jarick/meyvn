@@ -1,7 +1,7 @@
 // @flow
 import React, {Fragment} from 'react';
 import { uniqueId, last, range } from 'lodash'
-import { Slider, Container, Title, Donut, Line } from './styles'
+import { Slider, Container, Title, Donut, Line, Space } from './styles'
 
 
 type Props = {
@@ -41,7 +41,7 @@ export default ({
         ))}
       </Container>
       <Container>
-        <div style={{width: calcLeftBoarderWidth}}></div>
+        <Space width={calcLeftBoarderWidth} />
         <Donut
           key={uniqueId(`slider-donut-0`)}
           disable={step === 0}
@@ -61,7 +61,7 @@ export default ({
             />
           </Fragment>
         ))}
-        <div style={{width: calcRightBoarderWidth}}></div>
+        <Space width={calcRightBoarderWidth} />
       </Container>
     </Slider>
   )
