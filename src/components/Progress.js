@@ -1,0 +1,68 @@
+// @flow
+import React, {Fragment} from 'react';
+import { uniqueId, last, range } from 'lodash'
+import { Slider, Container, Title, Donut, Line } from './styles'
+
+
+type Props = {
+  leftBoarderWidth?: number,
+  rightBoarderWidth?: number,
+  titles: string[],
+  spaceWidth?: number,
+  step: number,
+  onChangeStep?: (step: number, oldStep: number) => void
+}
+
+export default ({
+  leftBoarderWidth,
+  rightBoarderWidth,
+  titles,
+  spaceWidth = 200,
+  step,
+  onChangeStep = () => {}
+}: Props) => {
+  const calcLeftBoarderWidth = leftBoarderWidth || Math.floor(titles[0].length / 2) * 15;
+  const calcRightBoarderWidth = rightBoarderWidth || Math.floor(last(titles).length / 2) * 15;
+  const calcWidth = calcLeftBoarderWidth + calcRightBoarderWidth + titles.length * spaceWidth
+
+  return (
+    <Slider
+      style={{width: calcWidth}}
+    >
+      <Container titles>
+        {titles.map((title, index) => (
+          <Title
+            key={uniqueId(`slider-title-${index}`)}
+            disable={step <= index}
+            onClick={() => onChangeStep(index + 1, step)}
+          >
+            {title}
+          </Title>
+        ))}
+      </Container>
+      <Container>
+        <div style={{width: calcLeftBoarderWidth}}></div>
+        <Donut
+          key={uniqueId(`slider-donut-0`)}
+          disable={step === 0}
+          onClick={() => onChangeStep(1, step)}
+        />
+        {range(1, titles.length).map((index) => ( 
+          <Fragment key={uniqueId(`slider-fragmet-${index}`)}>
+            <Line
+              key={uniqueId(`slider-line-${index}`)}
+              disable={step <= index}
+              animate={step - 1 === index}
+            />
+            <Donut
+              key={uniqueId(`slider-donut-${index}`)}
+              disable={step <= index}
+              onClick={() => onChangeStep(index + 1, step)}
+            />
+          </Fragment>
+        ))}
+        <div style={{width: calcRightBoarderWidth}}></div>
+      </Container>
+    </Slider>
+  )
+}
