@@ -9,6 +9,7 @@ type Props = {
   rightBoarderWidth?: number,
   titles: string[],
   spaceWidth?: number,
+  letterWidth?: number,
   step: number,
   onChangeStep?: (step: number, oldStep: number) => void
 }
@@ -18,11 +19,12 @@ export default ({
   rightBoarderWidth,
   titles,
   spaceWidth = 200,
+  letterWidth = 15,
   step,
   onChangeStep = () => {}
 }: Props) => {
-  const calcLeftBoarderWidth = leftBoarderWidth || Math.floor(titles[0].length / 2) * 15;
-  const calcRightBoarderWidth = rightBoarderWidth || Math.floor(last(titles).length / 2) * 15;
+  const calcLeftBoarderWidth = leftBoarderWidth || Math.floor(titles[0].length / 2) * letterWidth;
+  const calcRightBoarderWidth = rightBoarderWidth || Math.floor(last(titles).length / 2) * letterWidth;
   const calcWidth = calcLeftBoarderWidth + calcRightBoarderWidth + titles.length * spaceWidth
 
   return (
