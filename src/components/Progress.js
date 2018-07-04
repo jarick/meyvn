@@ -1,6 +1,6 @@
 // @flow
 import React, {Fragment} from 'react';
-import { uniqueId, last, range } from 'lodash'
+import { last, range } from 'lodash'
 import { Slider, Container, Title, Donut, Line, Space } from './styles'
 
 
@@ -34,7 +34,7 @@ export default ({
       <Container titles>
         {titles.map((title, index) => (
           <Title
-            key={uniqueId(`slider-title-${index}`)}
+            key={`slider-title-${index}`}
             disable={step <= index}
             onClick={() => onChangeStep(index + 1, step)}
           >
@@ -45,19 +45,19 @@ export default ({
       <Container>
         <Space width={calcLeftBoarderWidth} />
         <Donut
-          key={uniqueId(`slider-donut-0`)}
+          key={`slider-donut-0`}
           disable={step === 0}
           onClick={() => onChangeStep(1, step)}
         />
         {range(1, titles.length).map((index) => ( 
-          <Fragment key={uniqueId(`slider-fragmet-${index}`)}>
+          <Fragment key={`slider-fragmet-${index}`}>
             <Line
-              key={uniqueId(`slider-line-${index}`)}
+              key={`slider-line-${index}`}
               disable={step <= index}
               animate={step - 1 === index}
             />
             <Donut
-              key={uniqueId(`slider-donut-${index}`)}
+              key={`slider-donut-${index}`}
               disable={step <= index}
               onClick={() => onChangeStep(index + 1, step)}
             />
